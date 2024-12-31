@@ -1,44 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wasted</title>
+    <title>Count Down to 2025!</title>
     <style>
+        .bubble-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1; 
+}
+
+.bubble {
+    position: absolute;
+    bottom: -10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: rise 8s infinite ease-in-out;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-50vh) scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+    }
+}
+
         body {
-            background-color: rgba(59, 0, 33, 0.815);
-            color: red;
+            font-family: "serif";
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
+            background: linear-gradient(135deg, #970005, #b5679e, #0916a2);
+            color: #fff;
+            overflow: hidden;
         }
-        button {
-            background-color: hsl(0, 0%, 96%);
-            color: black;
-            border: none;
-            padding: 25px 50px;
-            cursor: pointer;
-            font-size: 38px;
+
+        #countdown {
+            text-align: center;
+            padding: 45px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 45px rgba(0, 0, 0, 0.2);
         }
-        #message {
-            display: none;
-            background-color: hsl(0, 0%, 100%);
-            color: rgb(0, 0, 0);
-            padding: 20px 20px;
-            margin-top: 24px;
+
+        #countdown h1 {
+            h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    word-wrap: break-word; 
+    max-width: 90%; 
+    text-align: center; 
+    line-height: 1.2; 
+}
+
         }
-        #message {
-            font-size: 60px; 
+
+        .time {
+            display: inline-block;
+            margin: 0 15px;
+            font-size: 2rem;
         }
-        
+
+        .time span {
+            display: block;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        #fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fireworks {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0); }
+        }
     </style>
 </head>
 <body>
-    <button id="myButton">Tap me:)</button>
-    <p id="message">FUCK YOU!!! </p>
-    <audio id="sound-effect" src="https://www.fesliyanstudios.com/play-mp3/3976"></audio>
-    <script src="script.js"></script>
+    <div class="bubble-background"></div>
+    
+
+    <div id="countdown">
+        <h1>✨Countdown To 2025!✨</h1>
+        <div class="time" id="days">0<span>Days</span></div>
+        <div class="time" id="hours">0<span>Hours</span></div>
+        <div class="time" id="minutes">0<span>Minutes</span></div>
+        <div class="time" id="seconds">0<span>Seconds</span></div>
+    </div>
+    <canvas id="fireworks"></canvas>
+   
+
+
+    <script>
+       const bubbleBackground = document.querySelector('.bubble-background');
+
+
+function createBubble() {
+    const bubble = document.createElement('div');
+    const size = Math.random() * 60 + 20; 
+    bubble.className = 'bubble';
+    bubble.style.width = `${size}px`;
+    bubble.style.height = `${size}px`;
+    bubble.style.left = `${Math.random() * 100}%`;
+    bubble.style.animationDuration = `${Math.random() * 5 + 5}s`; 
+    bubbleBackground.appendChild(bubble);
+
+    
+    setTimeout(() => bubble.remove(), 10000);
+}
+
+
+setInterval(createBubble, 500);
+
+        function countdown() {
+            const newYear = new Date(`January 1, ${new Date().getFullYear() + 1} 00:00:00`);
+            const now = new Date();
+            const timeDiff = newYear - now;
+
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerHTML = `${days}<span>Days</span>`;
+            document.getElementById('hours').innerHTML = `${hours}<span>Hours</span>`;
+            document.getElementById('minutes').innerHTML = `${minutes}<span>Minutes</span>`;
+            document.getElementById('seconds').innerHTML = `${seconds}<span>Seconds</span>`;
+
+            if (timeDiff < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = "<h1>Happy New Year!</h1>";
+            }
+        }
+
+        const countdownInterval = setInterval(countdown, 1000);
+
+        const canvas = document.getElementById('fireworks');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function createFirework(x, y) {
+            const particles = [];
+            for (let i = 0; i < 50; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: random(-3, 3),
+                    vy: random(-3, 3),
+                    alpha: 1
+                });
+            }
+            return particles;
+        }
+
+        let fireworks = [];
+        function animateFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            fireworks.forEach((firework, index) => {
+                firework.forEach(particle => {
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    particle.alpha -= 0.02;
+
+                    ctx.globalAlpha = particle.alpha;
+                    ctx.fillStyle = `hsl(${random(0, 360)}, 100%, 70%)`;
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                if (firework[0].alpha <= 0) fireworks.splice(index, 1);
+            });
+            requestAnimationFrame(animateFireworks);
+        }
+
+        canvas.addEventListener('click', e => {
+            const firework = createFirework(e.clientX, e.clientY);
+            fireworks.push(firework);
+        });
+
+        animateFireworks();
+    </script>
 </body>
 </html>

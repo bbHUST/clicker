@@ -1,215 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Count Down to 2025!</title>
-    <style>
-        .bubble-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1; 
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday E</title>
+  <style>
+   
+    .bubble-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
 
-.bubble {
-    position: absolute;
-    bottom: -10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    opacity: 0.7;
-    animation: rise 8s infinite ease-in-out;
-}
+    .bubble {
+      position: absolute;
+      bottom: -10px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: rise 8s infinite ease-in-out;
+    }
 
-@keyframes rise {
-    0% {
+    @keyframes rise {
+      0% {
         transform: translateY(0) scale(0.8);
         opacity: 0.8;
-    }
-    50% {
+      }
+      50% {
         transform: translateY(-50vh) scale(1.2);
         opacity: 0.5;
-    }
-    100% {
+      }
+      100% {
         transform: translateY(-100vh) scale(0.5);
         opacity: 0;
+      }
     }
+    
+    body {
+      font-family: "serif";
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #fffefe, #dc537e, #ff5858);
+      color: #ffffff;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Title Styling */
+    h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
+      text-shadow: 0 0 10px #dcd9d9, 0 0 20px #ff99cc, 0 0 40px #ff66b2;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 0 0 8px #fff, 0 0 16px #ff99cc, 0 0 32px #ff66b2;
+      }
+      50% {
+        text-shadow: 0 0 12px #fff, 0 0 24px #ffb3d9, 0 0 40px #ff66b2;
+      }
+    }
+
+    
+    .image-container {
+      margin: 20px 0;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    
+    p {
+      font-size: 1.5rem;
+      text-shadow: 0 0 5px #d6c2c2, 0 0 10px #ff99cc;
+    }
+   
+    body {
+      cursor: none;
+    }
+
+    
+    .cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: rgb(254, 215, 215); /* Red circle */
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s ease, height 0.2s ease; /* Smooth transition for size change */
+    }
+
+
+
+  .cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+  }
+
+  .cursor.expanding {
+    width: 60px;
+    height: 70px;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  /* Cursor Trail Effect */
+.cursor-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: trailExpand 1s ease-out forwards;
 }
 
-        body {
-            font-family: "serif";
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #970005, #b5679e, #0916a2);
-            color: #fff;
-            overflow: hidden;
-        }
-
-        #countdown {
-            text-align: center;
-            padding: 45px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 8px 45px rgba(0, 0, 0, 0.2);
-        }
-
-        #countdown h1 {
-            h1 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    word-wrap: break-word; 
-    max-width: 90%; 
-    text-align: center; 
-    line-height: 1.2; 
+@keyframes trailExpand {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
 }
 
-        }
 
-        .time {
-            display: inline-block;
-            margin: 0 15px;
-            font-size: 2rem;
-        }
 
-        .time span {
-            display: block;
-            font-size: 1rem;
-            margin-top: 5px;
-        }
 
-        #fireworks {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
 
-        @keyframes fireworks {
-            0% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-            100% { opacity: 0; transform: scale(0); }
-        }
-    </style>
+ 
+
+  </style>
 </head>
 <body>
-    <div class="bubble-background"></div>
-    
+  <!-- Bubble Background -->
+  <div class="bubble-background"></div>
 
-    <div id="countdown">
-        <h1>✨Countdown To 2025!✨</h1>
-        <div class="time" id="days">0<span>Days</span></div>
-        <div class="time" id="hours">0<span>Hours</span></div>
-        <div class="time" id="minutes">0<span>Minutes</span></div>
-        <div class="time" id="seconds">0<span>Seconds</span></div>
-    </div>
-    <canvas id="fireworks"></canvas>
+  <!-- Title -->
+  <h1>💗 Happy Birthday Eniola 💗</h1>
+
+  
+  <div class="image-container">
+    <img src="Snapchat-1985416782.jpg" alt="Birthday Picture">
+  </div>
+
+  
+  <p>May you be gifted with life's biggest joys and never-ending bliss.💕</p>
+
+  
    
-
-
-    <script>
+  <script>
        const bubbleBackground = document.querySelector('.bubble-background');
 
-
 function createBubble() {
-    const bubble = document.createElement('div');
-    const size = Math.random() * 60 + 20; 
-    bubble.className = 'bubble';
-    bubble.style.width = `${size}px`;
-    bubble.style.height = `${size}px`;
-    bubble.style.left = `${Math.random() * 100}%`;
-    bubble.style.animationDuration = `${Math.random() * 5 + 5}s`; 
-    bubbleBackground.appendChild(bubble);
+  const bubble = document.createElement('div');
+  const size = Math.random() * 70 + 20; // Random bubble size
+  bubble.className = 'bubble';
+  bubble.style.width = `${size}px`;
+  bubble.style.height = `${size}px`;
+  bubble.style.left = `${Math.random() * 100}%`;
+  bubble.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration
+  bubbleBackground.appendChild(bubble);
 
-    
-    setTimeout(() => bubble.remove(), 10000);
+  setTimeout(() => bubble.remove(), 10000); // Remove bubble after 10 seconds
 }
-
 
 setInterval(createBubble, 500);
 
-        function countdown() {
-            const newYear = new Date(`January 1, ${new Date().getFullYear() + 1} 00:00:00`);
-            const now = new Date();
-            const timeDiff = newYear - now;
+    
+document.addEventListener('mousemove', (e) => {
+  const heart = document.createElement('div');
+  heart.style.position = 'absolute';
+  heart.style.left = `${e.pageX}px`;
+  heart.style.top = `${e.pageY}px`;
+  heart.style.fontSize = '20px';
+  heart.style.color = 'red';
+  heart.textContent = '🤍';
+  heart.style.animation = 'floatHeart 1.5s ease-out forwards';
+  heart.style.pointerEvents = 'none';
 
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+  document.body.appendChild(heart);
 
-            document.getElementById('days').innerHTML = `${days}<span>Days</span>`;
-            document.getElementById('hours').innerHTML = `${hours}<span>Hours</span>`;
-            document.getElementById('minutes').innerHTML = `${minutes}<span>Minutes</span>`;
-            document.getElementById('seconds').innerHTML = `${seconds}<span>Seconds</span>`;
+  
+  setTimeout(() => {
+    heart.remove();
+  }, 1500);
+});
 
-            if (timeDiff < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById('countdown').innerHTML = "<h1>Happy New Year!</h1>";
-            }
-        }
 
-        const countdownInterval = setInterval(countdown, 1000);
+const style = document.createElement('style');
+style.innerHTML = `
+  @keyframes floatHeart {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5) translateY(-100px);
+      opacity: 0;
+    }
+  }
+`;
+document.head.appendChild(style);
+   
 
-        const canvas = document.getElementById('fireworks');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+  const cursor = document.createElement("div");
+    cursor.classList.add("cursor");
+    document.body.appendChild(cursor);
 
-        function random(min, max) {
-            return Math.random() * (max - min) + min;
-        }
+    
+    document.addEventListener("mousemove", (e) => {
+      const x = e.clientX;
+      const y = e.clientY;
 
-        function createFirework(x, y) {
-            const particles = [];
-            for (let i = 0; i < 50; i++) {
-                particles.push({
-                    x: x,
-                    y: y,
-                    vx: random(-3, 3),
-                    vy: random(-3, 3),
-                    alpha: 1
-                });
-            }
-            return particles;
-        }
+      
+      cursor.style.left = `${x}px`;
+      cursor.style.top = `${y}px`;
 
-        let fireworks = [];
-        function animateFireworks() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            fireworks.forEach((firework, index) => {
-                firework.forEach(particle => {
-                    particle.x += particle.vx;
-                    particle.y += particle.vy;
-                    particle.alpha -= 0.02;
+     
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
 
-                    ctx.globalAlpha = particle.alpha;
-                    ctx.fillStyle = `hsl(${random(0, 360)}, 100%, 70%)`;
-                    ctx.beginPath();
-                    ctx.arc(particle.x, particle.y, 3, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-                if (firework[0].alpha <= 0) fireworks.splice(index, 1);
-            });
-            requestAnimationFrame(animateFireworks);
-        }
+      
+      const centerX = windowWidth / 2;
+      const centerY = windowHeight / 2;
+      const distanceToCenter = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2));
 
-        canvas.addEventListener('click', e => {
-            const firework = createFirework(e.clientX, e.clientY);
-            fireworks.push(firework);
-        });
+     
+      const maxDistance = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
 
-        animateFireworks();
-    </script>
+     
+      const scale = 1 + (0.5 * (1 - distanceToCenter / maxDistance)); // Scaling effect
+
+      
+      cursor.style.width = `${20 + 30 * (1 - distanceToCenter / maxDistance)}px`; 
+      cursor.style.height = `${20 + 30 * (1 - distanceToCenter / maxDistance)}px`; 
+    });
+  </script>
 </body>
 </html>

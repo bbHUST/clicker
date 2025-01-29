@@ -144,7 +144,7 @@
   width: 20px;
   height: 20px;
   border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
+  border-radius: 20%;
   pointer-events: none;
   animation: trailExpand 1s ease-out forwards;
 }
@@ -160,15 +160,108 @@
   }
 }
 
+ /* Balloon Styles */
+ .balloon {
+      position: absolute;
+      bottom: -50px;
+      width: 40px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50%;
+      animation: floatUp 10s linear infinite;
+      cursor: pointer;
+    }
+    .balloon:before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background-color: black;
+      transform: translateX(-50%);
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+    @keyframes popEffect {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fallDown 8s linear infinite;
+    }
+    @keyframes fallDown {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .gift-box {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      width: 80px;
+      height: 70px;
+      background-color: gold;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      cursor: pointer;
+      animation: wiggle 1.5s infinite;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(0); }
+      25% { transform: rotate(-5deg); }
+      50% { transform: rotate(5deg); }
+      75% { transform: rotate(-5deg); }
+    }
+    .message {
+      display: none;
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      background-color: rgb(89, 0, 0);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
 
 
 
-
- 
 
   </style>
 </head>
 <body>
+
+  <div class="gift-box" onclick="showMessage()">🎁</div>
+  <div class="message">Till your next birthday...</div>
+
   <!-- Bubble Background -->
   <div class="bubble-background"></div>
 
@@ -181,7 +274,8 @@
   </div>
 
   
-  <p>May you be gifted with life's biggest joys and never-ending bliss.💕</p>
+  <p>May you be gifted with life's biggest joys and never-ending bliss.💕 
+    <br>enjoy your birthday week !<br> </p>
 
   
    
@@ -195,10 +289,10 @@ function createBubble() {
   bubble.style.width = `${size}px`;
   bubble.style.height = `${size}px`;
   bubble.style.left = `${Math.random() * 100}%`;
-  bubble.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random animation duration
+  bubble.style.animationDuration = `${Math.random() * 5 + 5}s`; 
   bubbleBackground.appendChild(bubble);
 
-  setTimeout(() => bubble.remove(), 10000); // Remove bubble after 10 seconds
+  setTimeout(() => bubble.remove(), 10000); 
 }
 
 setInterval(createBubble, 500);
@@ -210,9 +304,8 @@ document.addEventListener('mousemove', (e) => {
   heart.style.left = `${e.pageX}px`;
   heart.style.top = `${e.pageY}px`;
   heart.style.fontSize = '20px';
-  heart.style.color = 'red';
   heart.textContent = '🤍';
-  heart.style.animation = 'floatHeart 1.5s ease-out forwards';
+  heart.style.animation = 'floatHeart 1.2s ease-out forwards';
   heart.style.pointerEvents = 'none';
 
   document.body.appendChild(heart);
@@ -220,7 +313,7 @@ document.addEventListener('mousemove', (e) => {
   
   setTimeout(() => {
     heart.remove();
-  }, 1500);
+  }, 450);
 });
 
 
@@ -272,6 +365,39 @@ document.head.appendChild(style);
       cursor.style.width = `${20 + 30 * (1 - distanceToCenter / maxDistance)}px`; 
       cursor.style.height = `${20 + 30 * (1 - distanceToCenter / maxDistance)}px`; 
     });
+
+    function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = `${Math.random() * 100}%`;
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      document.body.appendChild(balloon);
+      
+      balloon.addEventListener("click", () => {
+        balloon.style.animation = "popEffect 0.3s ease-out";
+        setTimeout(() => balloon.remove(), 300);
+      });
+      
+      setTimeout(() => balloon.remove(), 9000);
+    }
+    setInterval(createBalloon, 2200);
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerHTML = "🌸";
+      flower.style.left = `${Math.random() * 100}%`;
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 8000);
+    }
+    setInterval(createFlower, 1200);
+    
+     function showMessage() {
+      document.querySelector(".message").style.display = "block"
+     }
+
+
+
   </script>
 </body>
 </html>

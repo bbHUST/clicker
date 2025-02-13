@@ -1,1 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #970005, #ef82a8, #606bed);
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .gif-container img {
+            width: 250px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+        .yes { background: #28a745; color: white; }
+        .no { background: #dc3545; color: white; }
+        
+        /* Floating hearts */
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            bottom: -10px;
+            font-size: 24px;
+            animation: float 5s linear infinite;
+        }
+
+        .balloon {
+      position: absolute;
+      bottom: -50px;
+      width: 40px;
+      height: 60px;
+      background-color: red;
+      border-radius: 50%;
+      animation: floatUp 10s linear infinite;
+      cursor: pointer;
+    }
+    .balloon:before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background-color: black;
+      transform: translateX(-50%);
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+      }
+    }
+    @keyframes popEffect {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.5);
+        opacity: 0;
+      }
+    }
+
+
+    .flower {
+      position: absolute;
+      top: -50px;
+      font-size: 24px;
+      animation: fallDown 8s linear infinite;
+    }
+    @keyframes fallDown {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1 id="valentineHeader">Hey Rose, will you be my Valentine? ❤️</h1>
+        <div class="gif-container">
+            <img id="responseGif" src="2a0d494ad03edeb4653af8e20d8ea15f.gif.gif" alt="Cute GIF">
+        </div>
+        <div class="buttons" id="buttonContainer">
+            <button class="btn yes" onclick="handleResponse(true)">Yes</button>
+            <button class="btn no" onclick="handleResponse(false)">No</button>
+        </div>
+        <p id="message"></p>
+    </div>  
+    
+    <script>
+        let noClickCount = 0;
+        const messages = [
+            "Are you sure? 😢", "Omo reconsider?", "Give me a chance?", 
+            "You might regret this...", "Last chance!", "Ahh stop na", 
+            "Still saying no?", "Why?", "I'm waiting...", "No vex me boss", 
+            "Just say Yes nigga...", "Nawa!", "Pleaseeee?",
+            "Almost giving up...", "Okay, really?", "No way!", "Fine, you win...", "I surrender", "LAST CHANCE!" 
+        ];
+        function handleResponse(isYes) {
+            const gif = document.getElementById("responseGif");
+            const message = document.getElementById("message");
+            const yesButton = document.querySelector(".yes");
+            const buttonContainer = document.getElementById("buttonContainer");
+            const valentineHeader = document.getElementById("valentineHeader");
+            if (isYes) {
+                gif.src = "3919990a31d22a32e8403cb01ee3796b.gif";
+                message.textContent = noClickCount >= 7 ? "Yay! Took you long enough! 🎉" : "Wait… did you just say YES?!, knew you’d make the right choice🤣💕";
+                yesButton.style.transform = "scale(1)";
+                buttonContainer.style.display = "none";
+                valentineHeader.style.display = "none";
+            } else {
+                gif.src = "hohohoo.gif.gif";
+                message.textContent = messages[Math.min(noClickCount, messages.length - 1)];
+                noClickCount++;
+                yesButton.style.transform = `scale(${1 + noClickCount * 0.05})`;
+            }
+        }
+        
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.textContent = "💗";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 1000);
+
+
+        function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = `${Math.random() * 100}%`;
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 80%, 60%)`;
+      document.body.appendChild(balloon);
+      
+      balloon.addEventListener("click", () => {
+        balloon.style.animation = "popEffect 0.3s ease-out";
+        setTimeout(() => balloon.remove(), 300);
+      });
+      
+      setTimeout(() => balloon.remove(), 9000);
+    }
+    setInterval(createBalloon, 2200);
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.innerHTML = "🌸";
+      flower.style.left = `${Math.random() * 100}%`;
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 8000);
+    }
+    setInterval(createFlower, 1200);
+    
+     function showMessage() {
+      document.querySelector(".message").style.display = "block"
+     }
+
+
+
+    </script>
+</body>
+</html>
 
